@@ -1,4 +1,4 @@
-import { Col, Layout, Row, Typography } from 'antd';
+import { Layout, Row, Typography } from 'antd';
 
 const { Footer } = Layout;
 
@@ -11,19 +11,19 @@ export const FooterLayout: React.FC = (_props) => {
     <Footer style={{ padding: 'inherit 5%' }}>
       <div style={{ flexDirection: 'column' }}>
         <Row justify="space-between">
-          <Col>
+          <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Contacts</Title>
             <Text>(021) 75920715</Text>
-          </Col>
-          <Col>
+          </div>
+          <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Our Locations</Title>
             <Text>Alfons Lotte Shopping Avenue</Text>
             <br />
             <Text>Alfons PIM</Text>
             <br />
             <Text>Alfons Panglima Polim</Text>
-          </Col>
-          <Col>
+          </div>
+          <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Company</Title>
             <Text>About</Text>
             <br />
@@ -34,21 +34,21 @@ export const FooterLayout: React.FC = (_props) => {
             <Text>Instagram</Text>
             <br />
             <Text>TikTok</Text>
-          </Col>
-          <Col>
+          </div>
+          <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Business Hours</Title>
 
             {/* row dan col */}
             <Row justify="space-between" style={{ columnGap: '10px' }}>
-              <Col>
+              <div style={{ flexDirection: 'column' }}>
                 {hari.map((h, i) => (
                   <>
                     <Text key={`${h}_1`}>{h}</Text>
                     <br key={`${h}_2`} />
                   </>
                 ))}
-              </Col>
-              <Col>
+              </div>
+              <div style={{ flexDirection: 'column' }}>
                 {Array(hari.length)
                   .fill(undefined)
                   .map((h, i) => (
@@ -57,8 +57,8 @@ export const FooterLayout: React.FC = (_props) => {
                       <br key={`${h}_4`} />
                     </>
                   ))}
-              </Col>
-              <Col>
+              </div>
+              <div style={{ flexDirection: 'column' }}>
                 {Array(hari.length)
                   .fill(undefined)
                   .map((_v, i) => (
@@ -67,9 +67,9 @@ export const FooterLayout: React.FC = (_props) => {
                       <br key={`${i}_6`} />
                     </>
                   ))}
-              </Col>
+              </div>
             </Row>
-          </Col>
+          </div>
         </Row>
 
         {/* footer text */}

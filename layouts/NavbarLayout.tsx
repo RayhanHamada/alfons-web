@@ -1,5 +1,5 @@
+import { Brand } from '@/components/Brand';
 import { Layout } from 'antd';
-import { Brand } from './Brand';
 
 const { Header } = Layout;
 
