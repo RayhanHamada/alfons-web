@@ -23,7 +23,7 @@ const CreateAppointmentForm: React.FC = (_props) => {
             onChange={onStepsChange}
             style={{ width: '300px' }}
           >
-            <Step title="Isi Data Diri" />
+            <Step title="Isi Buku Tamu" />
             <Step title="Pilih Cabang" />
             <Step title="Pilih Service" />
             <Step title="Pilih Pilih Tanggal" />

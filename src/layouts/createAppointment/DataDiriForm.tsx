@@ -67,9 +67,9 @@ const DataDiriForm: React.FC = (_props) => {
 
   return (
     <Col style={{ width: '100%', alignItems: 'center' }}>
-      <Title level={4}>Isi Data Diri</Title>
+      <Title level={4}>Isi Buku Tamu</Title>
       <br />
-      <Form form={form} layout="vertical">
+      <Form form={form} layout="vertical" onFinish={onFinish}>
         <Row align="stretch">
           <Form.Item<FormValue>
             label="Nomor HP"
