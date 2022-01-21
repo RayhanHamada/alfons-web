@@ -2,7 +2,7 @@ import { Layout, Row, Typography } from 'antd';
 
 const { Footer } = Layout;
 
-const { Title, Text } = Typography;
+const { Title, Text, Link } = Typography;
 
 const hari = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -25,15 +25,25 @@ export const FooterLayout: React.FC = (_props) => {
           </div>
           <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Company</Title>
-            <Text>About</Text>
+            <Link style={{ color: 'black' }} href="">
+              About
+            </Link>
             <br />
-            <Text>Careers</Text>
+            <Link style={{ color: 'black' }} href="">
+              Careers
+            </Link>
             <br />
-            <Text>Facebook</Text>
+            <Link style={{ color: 'black' }} href="">
+              Facebook
+            </Link>
             <br />
-            <Text>Instagram</Text>
+            <Link style={{ color: 'black' }} href="">
+              Instagram
+            </Link>
             <br />
-            <Text>TikTok</Text>
+            <Link style={{ color: 'black' }} href="">
+              TikTok
+            </Link>
           </div>
           <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Business Hours</Title>
