@@ -74,7 +74,7 @@ export const FooterLayout: React.FC = (_props) => {
 
         {/* footer text */}
         <div style={{ textAlign: 'center', paddingTop: '30px' }}>
-          <Text>Alfons Salon ©2021 Created by Kelompok 2 P3L 4IA12</Text>
+          <Text>2021 Copyright Alfons Salon • All rights reserved</Text>
         </div>
       </div>
     </Footer>
