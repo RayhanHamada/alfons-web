@@ -12,7 +12,7 @@ import {
   Spin,
   Typography,
 } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const { Title, Text } = Typography;
 const { useForm } = Form;
@@ -30,8 +30,15 @@ const DataDiriForm: React.FC = (_props) => {
   const [finishRegister, setFinishRegister] = useState(false);
   const [freeze, setFreeze] = useState(false);
 
-  const { name, jenisKelamin, setDataDiri, resetDataDiri } = useDataDiri();
+  const { name, jenisKelamin, setDataDiri, resetDataDiri, dataFilled } =
+    useDataDiri();
   const { setCanContinue } = useStepsStore();
+
+  useEffect(() => {
+    if (dataFilled) {
+      setCanContinue(true);
+    }
+  }, [dataFilled, setCanContinue]);
 
   const onCariNomorHp = async (value: string) => {
     // jika user re input nomor hp

@@ -7,6 +7,7 @@ const useDataDiri = createStore(
       name: '',
       phoneNumber: '',
       jenisKelamin: 'PRIA' as 'PRIA' | 'WANITA',
+      dataFilled: false,
     },
     (set, get) => ({
       setName: (name: string) => set({ name }),
@@ -21,10 +22,16 @@ const useDataDiri = createStore(
       }) =>
         set({
           ...dataDiri,
+          dataFilled: true,
         }),
 
       resetDataDiri: () =>
-        set({ name: '', phoneNumber: '', jenisKelamin: 'PRIA' }),
+        set({
+          name: '',
+          phoneNumber: '',
+          jenisKelamin: 'PRIA',
+          dataFilled: false,
+        }),
     })
   )
 );
