@@ -1,4 +1,5 @@
 import useDataDiri from '@/hooks/useDataDiri';
+import useStepsStore from '@/hooks/useStepsStore';
 import supabaseClient from '@/utility/supabaseClient';
 import {
   Button,
@@ -30,9 +31,13 @@ const DataDiriForm: React.FC = (_props) => {
   const [freeze, setFreeze] = useState(false);
 
   const { name, jenisKelamin, setDataDiri, resetDataDiri } = useDataDiri();
+  const { setCanContinue } = useStepsStore();
 
   const onCariNomorHp = async (value: string) => {
+    // jika user re input nomor hp
     setIsBaru(false);
+    setCanContinue(false);
+
     if (value === '') {
       message.error('Nomor Handphone harus diisi !');
       setIsChecked(false);
@@ -60,6 +65,8 @@ const DataDiriForm: React.FC = (_props) => {
         jenisKelamin: jenis_kelamin,
         phoneNumber: phone_number,
       });
+
+      setCanContinue(true);
     }
 
     console.log(checkData);
@@ -96,6 +103,7 @@ const DataDiriForm: React.FC = (_props) => {
 
       setFinishRegister(true);
       setIsBaru(false);
+      setCanContinue(true);
     }
 
     setFreeze(false);
