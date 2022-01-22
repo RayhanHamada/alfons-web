@@ -8,6 +8,7 @@ import {
   message,
   Radio,
   Row,
+  Spin,
   Typography,
 } from 'antd';
 import { useState } from 'react';
@@ -25,16 +26,17 @@ const DataDiriForm: React.FC = (_props) => {
   const [form] = useForm<FormValue>();
   const [isChecked, setIsChecked] = useState(false);
   const [isBaru, setIsBaru] = useState(false);
-  const [finishRegister, setFinisRegister] = useState(false);
+  const [finishRegister, setFinishRegister] = useState(false);
+  const [freeze, setFreeze] = useState(false);
 
-  // untuk klien lama
-  const [klienLamaName, setKlienLamaName] = useState<string>();
-
-  const {} = useDataDiri();
+  const { name, jenisKelamin, setDataDiri, resetDataDiri } = useDataDiri();
 
   const onCariNomorHp = async (value: string) => {
+    setIsBaru(false);
     if (value === '') {
       message.error('Nomor Handphone harus diisi !');
+      setIsChecked(false);
+      resetDataDiri();
       return;
     }
 
@@ -52,8 +54,12 @@ const DataDiriForm: React.FC = (_props) => {
     if (!checkData) {
       setIsBaru(true);
     } else {
-      const { jenis_kelamin, name } = checkData;
-      setKlienLamaName(`${jenis_kelamin === 'PRIA' ? 'Tn.' : 'Ny.'} ${name}`);
+      const { jenis_kelamin, name, phone_number } = checkData;
+      setDataDiri({
+        name,
+        jenisKelamin: jenis_kelamin,
+        phoneNumber: phone_number,
+      });
     }
 
     console.log(checkData);
@@ -61,15 +67,45 @@ const DataDiriForm: React.FC = (_props) => {
     setIsChecked(true);
   };
 
-  const onFinish = (v: FormValue) => {
-    console.log(v);
+  const onDaftarClicked = async (v: FormValue) => {
+    const { name, jenisKelamin: jenis_kelamin, phoneNumber: phone_number } = v;
+    setFreeze(true);
+
+    // insert data ke table klien
+    const { data: insertData, error: insertError } = await supabaseClient
+      .from('klien')
+      .insert({
+        name,
+        jenis_kelamin,
+        phone_number,
+      })
+      .maybeSingle();
+
+    if (insertError || !insertData) {
+      await message.error(
+        'Terjadi kegagalan, silahkan refresh dan coba mendaftar lagi',
+        1
+      );
+    } else {
+      await message.error('Sukses', 1);
+      setDataDiri({
+        name: insertData.name,
+        jenisKelamin: insertData.jenis_kelamin,
+        phoneNumber: insertData.phone_number,
+      });
+
+      setFinishRegister(true);
+      setIsBaru(false);
+    }
+
+    setFreeze(false);
   };
 
   return (
     <Col style={{ width: '100%', alignItems: 'center' }}>
       <Title level={4}>Isi Buku Tamu</Title>
       <br />
-      <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form form={form} layout="vertical" onFinish={onDaftarClicked}>
         <Row align="stretch">
           <Form.Item<FormValue>
             label="Nomor HP"
@@ -83,6 +119,7 @@ const DataDiriForm: React.FC = (_props) => {
               placeholder="Nomor HP Anda"
               onSearch={onCariNomorHp}
               style={{ outline: 'none', boxShadow: 'none' }}
+              disabled={freeze}
             />
           </Form.Item>
         </Row>
@@ -94,14 +131,15 @@ const DataDiriForm: React.FC = (_props) => {
             </Title>
           ) : (
             <Title level={4}>
-              Selamat Datang {finishRegister ? '' : 'Kembali'}, {klienLamaName}
+              Selamat Datang {finishRegister ? '' : 'Kembali'},
+              {` ${jenisKelamin === 'PRIA' ? 'Tn.' : 'Ny.'} ${name}`}
             </Title>
           )
         ) : undefined}
         {isBaru ? (
           <>
-            <Form.Item label="Nama" required>
-              <Input type="text" />
+            <Form.Item label="Nama Lengkap" name="name" required>
+              <Input type="text" disabled={freeze} />
             </Form.Item>
             <Form.Item
               label="Jenis Kelamin"
@@ -109,13 +147,19 @@ const DataDiriForm: React.FC = (_props) => {
               initialValue="WANITA"
               required
             >
-              <Radio.Group>
+              <Radio.Group disabled={freeze}>
                 <Radio value="PRIA">Pria</Radio>
                 <Radio value="WANITA">Wanita</Radio>
               </Radio.Group>
             </Form.Item>
-            <Button type="primary" htmlType="submit">
-              Daftar !
+            <Button type="primary" htmlType="submit" disabled={freeze}>
+              {!freeze ? (
+                'Daftar !'
+              ) : (
+                <>
+                  <Spin spinning /> Sedang mendaftarkan...
+                </>
+              )}
             </Button>
           </>
         ) : undefined}

@@ -13,6 +13,18 @@ const useDataDiri = createStore(
       setPhoneNumber: (phoneNumber: string) => set({ phoneNumber }),
       setJenisKelamin: (jenisKelamin: 'PRIA' | 'WANITA') =>
         set({ jenisKelamin }),
+
+      setDataDiri: (dataDiri: {
+        name: string;
+        phoneNumber: string;
+        jenisKelamin: 'PRIA' | 'WANITA';
+      }) =>
+        set({
+          ...dataDiri,
+        }),
+
+      resetDataDiri: () =>
+        set({ name: '', phoneNumber: '', jenisKelamin: 'PRIA' }),
     })
   )
 );

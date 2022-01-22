@@ -20,13 +20,11 @@ const CreateAppointmentForm: React.FC = (_props) => {
             direction="vertical"
             size="small"
             current={step}
-            onChange={onStepsChange}
             style={{ width: '300px' }}
           >
             <Step title="Isi Buku Tamu" />
-            <Step title="Pilih Cabang" />
             <Step title="Pilih Service" />
-            <Step title="Pilih Pilih Tanggal" />
+            <Step title="Pilih Cabang dan Tanggal" />
             <Step title="Pilih Stylish dan Jam" />
             <Step title="Summary" />
           </Steps>
