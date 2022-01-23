@@ -2,8 +2,13 @@ import useServiceStore from '@/hooks/useServiceStore';
 import useStepsStore from '@/hooks/useStepsStore';
 import supabaseClient from '@/utility/supabaseClient';
 import { numberFormat } from '@/utility/util';
-import { Button, Col, List, message, Row, Typography } from 'antd';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { Button, Col, Input, List, message, Row, Typography } from 'antd';
+import {
+  ChangeEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import ServiceDrawer from './ServiceDrawer';
 
 type DataType = { id: number; name: string; cost_estimate: number };
@@ -11,7 +16,7 @@ type DataType = { id: number; name: string; cost_estimate: number };
 const { Title, Text } = Typography;
 
 const ServiceForm: React.FC = (_props) => {
-  const { serviceIds, dataFilled, toggleDrawer, removeServiceId } =
+  const { serviceIds, dataFilled, toggleDrawer, removeServiceId, setNote } =
     useServiceStore();
   const { setCanContinue } = useStepsStore();
   const [orderedService, setOrderedService] = useState<DataType[]>([]);
@@ -42,6 +47,10 @@ const ServiceForm: React.FC = (_props) => {
 
   const onTambahServiceClick: MouseEventHandler<HTMLButtonElement> = (_e) => {
     toggleDrawer();
+  };
+
+  const onNoteChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    setNote(e.target.value);
   };
 
   return (
@@ -130,6 +139,15 @@ const ServiceForm: React.FC = (_props) => {
             </Row>
           </List.Item>
         ) : undefined}
+        <br />
+        <Title level={4}>Catatan</Title>
+        <Input.TextArea
+          rows={5}
+          placeholder="Warna Cat yang diinginkan, Ukuran rambut anda, Apa saja yang anda perlu katakan kepada stylish anda..."
+          onChange={onNoteChange}
+        />
+        <br />
+        <br />
       </Col>
       <ServiceDrawer />
     </>

@@ -8,6 +8,7 @@ const useServiceStore = createStore(
 
       serviceIds: [] as number[],
       dataFilled: false,
+      note: '',
     },
     (set, get) => ({
       toggleDrawer: () =>
@@ -30,6 +31,7 @@ const useServiceStore = createStore(
         })),
 
       resetServiceStore: () => set({ serviceIds: [], dataFilled: false }),
+      setNote: (note: string) => set({ note }),
     })
   )
 );
