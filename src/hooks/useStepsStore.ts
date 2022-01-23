@@ -13,8 +13,8 @@ const useStepsStore = createStore(
           step: !canContinue || step === 5 ? step : step + 1,
         })),
       decrementStep: () =>
-        set(({ step, canContinue }) => ({
-          step: !canContinue || step === 0 ? step : step - 1,
+        set(({ step }) => ({
+          step: step === 0 ? step : step - 1,
         })),
 
       setCanContinue: (canContinue: boolean) => set({ canContinue }),

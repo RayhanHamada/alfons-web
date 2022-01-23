@@ -18,6 +18,10 @@ const CreateAppointmentForm: React.FC = (_props) => {
     setCanContinue(false);
   };
 
+  const onStepBackClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    decrementStep();
+  };
+
   return (
     <Col style={{ height: '100vh', padding: '100px' }}>
       <Row justify="start" wrap={false}>
@@ -41,10 +45,16 @@ const CreateAppointmentForm: React.FC = (_props) => {
           ) : step === 1 ? (
             <ServiceForm />
           ) : undefined}
-          <Row justify="end">
+          <Row justify="space-between">
+            {step !== 0 ? (
+              <Button type="ghost" onClick={onStepBackClick}>
+                Kembali
+              </Button>
+            ) : undefined}
+            <div></div>
             {canContinue ? (
               <Button type="primary" onClick={onContinueClick}>
-                Continue
+                Lanjut
               </Button>
             ) : undefined}
           </Row>
