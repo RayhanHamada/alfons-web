@@ -2,10 +2,9 @@ import useStepsStore from '@/hooks/useStepsStore';
 import { Button, Col, Row, Steps } from 'antd';
 import { MouseEventHandler } from 'react';
 import DataDiriForm from './DataDiriForm';
+import ServiceForm from './ServiceForm';
 
 const { Step } = Steps;
-
-type OnStepsChange = (current: number) => void;
 
 const CreateAppointmentForm: React.FC = (_props) => {
   const { step, canContinue, setCanContinue, incrementStep, decrementStep } =
@@ -13,6 +12,10 @@ const CreateAppointmentForm: React.FC = (_props) => {
 
   const onContinueClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     incrementStep();
+
+    // setiap kali user lanjut ke step selanjutnya nggak boleh lanjut lagi ke step selanjutnya
+    // kecuali data di step itu sudah terisi.
+    setCanContinue(false);
   };
 
   return (
@@ -33,7 +36,11 @@ const CreateAppointmentForm: React.FC = (_props) => {
           </Steps>
         </div>
         <Col style={{ width: '100%' }}>
-          {step === 0 ? <DataDiriForm /> : undefined}
+          {step === 0 ? (
+            <DataDiriForm />
+          ) : step === 1 ? (
+            <ServiceForm />
+          ) : undefined}
           <Row justify="end">
             {canContinue ? (
               <Button type="primary" onClick={onContinueClick}>

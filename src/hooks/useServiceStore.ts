@@ -19,7 +19,8 @@ const useServiceStore = createStore(
       removeServiceId: (id: number) =>
         set(({ serviceIds }) => ({
           serviceIds: serviceIds.filter((iid) => iid !== id),
-          dataFilled: serviceIds.length === 1,
+          //   jika service tinggal 1 atau gaada, dan melakukan remove, anggap data belum diisi
+          dataFilled: ![0, 1].includes(serviceIds.length),
         })),
 
       resetServiceStore: () => set({ serviceIds: [], dataFilled: false }),
