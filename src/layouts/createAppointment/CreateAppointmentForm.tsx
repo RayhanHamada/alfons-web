@@ -34,7 +34,8 @@ const CreateAppointmentForm: React.FC = (_props) => {
           >
             <Step title="Isi Buku Tamu" />
             <Step title="Pilih Service" />
-            <Step title="Pilih Cabang dan Tanggal" />
+            <Step title="Pilih Cabang" />
+            <Step title="Pilih Tanggal" />
             <Step title="Pilih Stylish dan Jam" />
             <Step title="Summary" />
           </Steps>
