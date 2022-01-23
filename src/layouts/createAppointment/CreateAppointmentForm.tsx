@@ -1,6 +1,7 @@
 import useStepsStore from '@/hooks/useStepsStore';
 import { Button, Col, Row, Steps } from 'antd';
 import { MouseEventHandler } from 'react';
+import CabangForm from './CabangForm';
 import DataDiriForm from './DataDiriForm';
 import ServiceForm from './ServiceForm';
 
@@ -45,6 +46,8 @@ const CreateAppointmentForm: React.FC = (_props) => {
             <DataDiriForm />
           ) : step === 1 ? (
             <ServiceForm />
+          ) : step === 2 ? (
+            <CabangForm />
           ) : undefined}
           <Row justify="space-between">
             {step !== 0 ? (
