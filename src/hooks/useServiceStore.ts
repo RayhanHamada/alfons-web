@@ -4,10 +4,16 @@ import { combine } from 'zustand/middleware';
 const useServiceStore = createStore(
   combine(
     {
+      isDrawerOpen: false,
+
       serviceIds: [] as number[],
       dataFilled: false,
     },
     (set, get) => ({
+      toggleDrawer: () =>
+        set(({ isDrawerOpen }) => ({ isDrawerOpen: !isDrawerOpen })),
+      closeDrawer: () => set({ isDrawerOpen: false }),
+
       addServiceId: (id: number) =>
         set(({ serviceIds }) => ({
           serviceIds: serviceIds.includes(id)
