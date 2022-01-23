@@ -1,4 +1,4 @@
-import useDataDiri from '@/hooks/useDataDiri';
+import useDataDiri from '@/hooks/useDataDiriStore';
 import useStepsStore from '@/hooks/useStepsStore';
 import supabaseClient from '@/utility/supabaseClient';
 import {
