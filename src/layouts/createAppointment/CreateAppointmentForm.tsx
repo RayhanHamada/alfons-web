@@ -3,6 +3,7 @@ import { Button, Col, Row, Steps } from 'antd';
 import { MouseEventHandler } from 'react';
 import CabangForm from './CabangForm';
 import DataDiriForm from './DataDiriForm';
+import JamStylishForm from './JamStylishForm';
 import ServiceForm from './ServiceForm';
 import TanggalForm from './TanggalForm';
 
@@ -51,6 +52,8 @@ const CreateAppointmentForm: React.FC = (_props) => {
             <CabangForm />
           ) : step === 3 ? (
             <TanggalForm />
+          ) : step === 4 ? (
+            <JamStylishForm />
           ) : undefined}
           <br />
           <Row justify="space-between">
