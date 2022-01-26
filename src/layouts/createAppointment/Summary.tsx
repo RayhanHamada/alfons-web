@@ -2,6 +2,7 @@ import useCabangStore from '@/hooks/useCabangStore';
 import useDataDiri from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
+import useStepsStore from '@/hooks/useStepsStore';
 import useTanggalStore from '@/hooks/useTanggalStore';
 import supabaseClient from '@/utility/supabaseClient';
 import { numberFormat } from '@/utility/util';
@@ -16,6 +17,11 @@ const Summary: React.FC = (_props) => {
   const { jamId, stylishId } = useJamStylishStore();
   const { serviceIds } = useServiceStore();
   const { tanggal } = useTanggalStore();
+  const { setCanContinue } = useStepsStore();
+
+  useEffect(() => {
+    setCanContinue(true);
+  }, [setCanContinue]);
 
   const [summary, setSummary] = useState({
     cabangName: '',

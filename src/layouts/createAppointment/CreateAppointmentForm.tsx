@@ -26,6 +26,8 @@ const CreateAppointmentForm: React.FC = (_props) => {
     decrementStep();
   };
 
+  const onBuatAppointment: MouseEventHandler<HTMLButtonElement> = (e) => {};
+
   return (
     <Col style={{ padding: '100px' }}>
       <Row justify="start" wrap={false}>
@@ -67,9 +69,15 @@ const CreateAppointmentForm: React.FC = (_props) => {
             ) : undefined}
             <div></div>
             {canContinue ? (
-              <Button type="primary" onClick={onContinueClick}>
-                Lanjut
-              </Button>
+              step !== 5 ? (
+                <Button type="primary" onClick={onContinueClick}>
+                  Lanjut
+                </Button>
+              ) : (
+                <Button type="primary" onClick={onBuatAppointment}>
+                  Buat Appointment !
+                </Button>
+              )
             ) : undefined}
           </Row>
         </Col>
