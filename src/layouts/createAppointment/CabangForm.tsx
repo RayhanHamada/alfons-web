@@ -16,14 +16,12 @@ const { Title, Text } = Typography;
 
 const CabangForm: React.FC = (_props) => {
   const [cabangs, setCabangs] = useState<{ id: number; name: string }[]>([]);
-  const { setCabang, dataFilled, cabangId } = useCabangStore();
+  const { setCabang, cabangId } = useCabangStore();
   const { setCanContinue } = useStepsStore();
 
   useEffect(() => {
-    if (dataFilled) {
-      setCanContinue(true);
-    }
-  }, [dataFilled, setCanContinue]);
+    setCanContinue(true);
+  }, [setCanContinue]);
 
   useEffect(() => {
     (async () => {
@@ -64,11 +62,13 @@ const CabangForm: React.FC = (_props) => {
           <br />
           <Form.Item name="Cabang" initialValue={cabangId}>
             <Radio.Group onChange={onRadioChange}>
-              {cabangs.map((c) => (
-                <Radio key={c.id} value={c.id}>
-                  {c.name}
-                </Radio>
-              ))}
+              {cabangs
+                .sort((a, b) => a.id - b.id)
+                .map((c) => (
+                  <Radio key={c.id} value={c.id}>
+                    {c.name}
+                  </Radio>
+                ))}
             </Radio.Group>
           </Form.Item>
         </Form>
