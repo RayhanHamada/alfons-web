@@ -4,12 +4,14 @@ import { combine } from 'zustand/middleware';
 const useDataDiri = createStore(
   combine(
     {
+      isChecked: false,
       name: '',
       phoneNumber: '',
       jenisKelamin: 'PRIA' as 'PRIA' | 'WANITA',
       dataFilled: false,
     },
     (set, get) => ({
+      setIsChecked: (isChecked: boolean) => set({ isChecked }),
       setName: (name: string) => set({ name }),
       setPhoneNumber: (phoneNumber: string) => set({ phoneNumber }),
       setJenisKelamin: (jenisKelamin: 'PRIA' | 'WANITA') =>

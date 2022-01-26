@@ -25,13 +25,20 @@ type FormValue = {
 
 const DataDiriForm: React.FC = (_props) => {
   const [form] = useForm<FormValue>();
-  const [isChecked, setIsChecked] = useState(false);
   const [isBaru, setIsBaru] = useState(false);
   const [finishRegister, setFinishRegister] = useState(false);
   const [freeze, setFreeze] = useState(false);
 
-  const { name, jenisKelamin, setDataDiri, resetDataDiri, dataFilled } =
-    useDataDiri();
+  const {
+    name,
+    jenisKelamin,
+    isChecked,
+    phoneNumber,
+    dataFilled,
+    setDataDiri,
+    resetDataDiri,
+    setIsChecked,
+  } = useDataDiri();
   const { setCanContinue } = useStepsStore();
 
   useEffect(() => {
@@ -135,6 +142,7 @@ const DataDiriForm: React.FC = (_props) => {
               onSearch={onCariNomorHp}
               style={{ outline: 'none', boxShadow: 'none' }}
               disabled={freeze}
+              value={phoneNumber}
             />
           </Form.Item>
         </Row>
