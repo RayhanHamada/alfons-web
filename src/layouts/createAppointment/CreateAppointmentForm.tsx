@@ -25,7 +25,7 @@ const CreateAppointmentForm: React.FC = (_props) => {
   };
 
   return (
-    <Col style={{ height: '100vh', padding: '100px' }}>
+    <Col style={{ padding: '100px' }}>
       <Row justify="start" wrap={false}>
         <div>
           <Steps
@@ -52,6 +52,7 @@ const CreateAppointmentForm: React.FC = (_props) => {
           ) : step === 3 ? (
             <TanggalForm />
           ) : undefined}
+          <br />
           <Row justify="space-between">
             {step !== 0 ? (
               <Button type="ghost" onClick={onStepBackClick}>
