@@ -4,6 +4,7 @@ import { MouseEventHandler } from 'react';
 import CabangForm from './CabangForm';
 import DataDiriForm from './DataDiriForm';
 import ServiceForm from './ServiceForm';
+import TanggalForm from './TanggalForm';
 
 const { Step } = Steps;
 
@@ -48,6 +49,8 @@ const CreateAppointmentForm: React.FC = (_props) => {
             <ServiceForm />
           ) : step === 2 ? (
             <CabangForm />
+          ) : step === 3 ? (
+            <TanggalForm />
           ) : undefined}
           <Row justify="space-between">
             {step !== 0 ? (

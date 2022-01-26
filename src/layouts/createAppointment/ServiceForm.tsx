@@ -85,7 +85,7 @@ const ServiceForm: React.FC = (_props) => {
               <List.Item.Meta
                 title={
                   <Text>
-                    {i + 1}. {service.name}
+                    {i + 1}. *{service.name}
                   </Text>
                 }
               />

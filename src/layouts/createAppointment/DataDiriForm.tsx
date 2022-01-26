@@ -141,8 +141,8 @@ const DataDiriForm: React.FC = (_props) => {
         {isChecked ? (
           isBaru ? (
             <Title level={5}>
-              Halo, untuk melanjutkan pendaftaran silahkan isi data diri berikut
-              !
+              Nama anda belum terdaftar, untuk melanjutkan pendaftaran silahkan
+              isi data diri berikut !
             </Title>
           ) : (
             <Title level={4}>
