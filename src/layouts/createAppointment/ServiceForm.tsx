@@ -16,8 +16,14 @@ type DataType = { id: number; name: string; cost_estimate: number };
 const { Title, Text } = Typography;
 
 const ServiceForm: React.FC = (_props) => {
-  const { serviceIds, dataFilled, toggleDrawer, removeServiceId, setNote } =
-    useServiceStore();
+  const {
+    serviceIds,
+    dataFilled,
+    toggleDrawer,
+    removeServiceId,
+    setNote,
+    note,
+  } = useServiceStore();
   const { setCanContinue } = useStepsStore();
   const [orderedService, setOrderedService] = useState<DataType[]>([]);
 
@@ -145,6 +151,7 @@ const ServiceForm: React.FC = (_props) => {
           rows={5}
           placeholder="Warna Cat yang diinginkan, Ukuran rambut anda, Apa saja yang anda perlu katakan kepada stylish anda..."
           onChange={onNoteChange}
+          value={note}
         />
         <br />
         <br />
