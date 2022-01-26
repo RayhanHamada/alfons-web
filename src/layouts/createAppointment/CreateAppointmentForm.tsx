@@ -5,6 +5,7 @@ import CabangForm from './CabangForm';
 import DataDiriForm from './DataDiriForm';
 import JamStylishForm from './JamStylishForm';
 import ServiceForm from './ServiceForm';
+import Summary from './Summary';
 import TanggalForm from './TanggalForm';
 
 const { Step } = Steps;
@@ -54,7 +55,9 @@ const CreateAppointmentForm: React.FC = (_props) => {
             <TanggalForm />
           ) : step === 4 ? (
             <JamStylishForm />
-          ) : undefined}
+          ) : (
+            <Summary />
+          )}
           <br />
           <Row justify="space-between">
             {step !== 0 ? (

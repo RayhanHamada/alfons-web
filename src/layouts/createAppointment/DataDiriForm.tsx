@@ -38,6 +38,7 @@ const DataDiriForm: React.FC = (_props) => {
     setDataDiri,
     resetDataDiri,
     setIsChecked,
+    setId,
   } = useDataDiri();
   const { setCanContinue } = useStepsStore();
 
@@ -73,7 +74,8 @@ const DataDiriForm: React.FC = (_props) => {
     if (!checkData) {
       setIsBaru(true);
     } else {
-      const { jenis_kelamin, name, phone_number } = checkData;
+      const { jenis_kelamin, name, phone_number, id } = checkData;
+      setId(id);
       setDataDiri({
         name,
         jenisKelamin: jenis_kelamin,
@@ -109,6 +111,7 @@ const DataDiriForm: React.FC = (_props) => {
       );
     } else {
       await message.error('Sukses', 1);
+      setId(insertData.id);
       setDataDiri({
         name: insertData.name,
         jenisKelamin: insertData.jenis_kelamin,
