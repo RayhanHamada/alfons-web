@@ -2,6 +2,7 @@ import useCabangStore from '@/hooks/useCabangStore';
 import useDataDiri from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
+import useTanggalStore from '@/hooks/useTanggalStore';
 import supabaseClient from '@/utility/supabaseClient';
 import { numberFormat } from '@/utility/util';
 import { Col, message, Row, Typography } from 'antd';
@@ -14,6 +15,7 @@ const Summary: React.FC = (_props) => {
   const { cabangId } = useCabangStore();
   const { jamId, stylishId } = useJamStylishStore();
   const { serviceIds } = useServiceStore();
+  const { tanggal } = useTanggalStore();
 
   const [summary, setSummary] = useState({
     cabangName: '',
@@ -131,6 +133,16 @@ const Summary: React.FC = (_props) => {
           style={{ width: '100%', paddingLeft: 200, paddingRight: 200 }}
           justify="space-between"
         >
+          <Text>Tanggal</Text>
+          <Text>
+            <b>{tanggal.format('dddd, DD MMMM YYYY')}</b>
+          </Text>
+        </Row>
+        <br />
+        <Row
+          style={{ width: '100%', paddingLeft: 200, paddingRight: 200 }}
+          justify="space-between"
+        >
           <Text>Pukul</Text>
           <Text>
             <b>{summary.pukul}</b>
@@ -155,7 +167,7 @@ const Summary: React.FC = (_props) => {
           style={{ width: '100%', paddingLeft: 200, paddingRight: 200 }}
           justify="space-between"
         >
-          <Text>Total Harga</Text>
+          <Text>Total Perkiraan Harga</Text>
           <Text>
             <b>{numberFormat(summary.totalCostEstimate)}</b>
           </Text>
