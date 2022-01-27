@@ -18,6 +18,11 @@ const useStepsStore = createStore(
         })),
 
       setCanContinue: (canContinue: boolean) => set({ canContinue }),
+      reset: () =>
+        set({
+          step: 0,
+          canContinue: false,
+        }),
     })
   )
 );

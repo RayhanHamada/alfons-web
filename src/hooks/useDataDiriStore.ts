@@ -32,6 +32,8 @@ const useDataDiri = createStore(
 
       resetDataDiri: () =>
         set({
+          isChecked: false,
+          klienId: undefined,
           name: '',
           phoneNumber: '',
           jenisKelamin: 'PRIA',

@@ -12,6 +12,10 @@ const useTanggalStore = createStore(
         set({
           tanggal,
         }),
+      reset: () =>
+        set({
+          tanggal: dayjs().startOf('day'),
+        }),
     })
   )
 );

@@ -20,6 +20,12 @@ const useJamStylishStore = createStore(
           jamId,
           dataFilled: true,
         }),
+      reset: () =>
+        set({
+          stylishId: undefined,
+          jamId: undefined,
+          dataFilled: false,
+        }),
     })
   )
 );

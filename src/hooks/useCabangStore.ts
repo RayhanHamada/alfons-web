@@ -13,6 +13,12 @@ const useCabangStore = createStore(
           cabangId,
           dataFilled: true,
         }),
+
+      reset: () =>
+        set({
+          cabangId: 1,
+          dataFilled: false,
+        }),
     })
   )
 );

@@ -32,6 +32,13 @@ const useServiceStore = createStore(
 
       resetServiceStore: () => set({ serviceIds: [], dataFilled: false }),
       setNote: (note: string) => set({ note }),
+      reset: () =>
+        set({
+          isDrawerOpen: false,
+          serviceIds: [],
+          note: '',
+          dataFilled: false,
+        }),
     })
   )
 );
