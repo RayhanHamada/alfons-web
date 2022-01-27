@@ -1,8 +1,9 @@
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useTanggalStore from '@/hooks/useTanggalStore';
 import supabaseClient from '@/utility/supabaseClient';
-import { Col, message, Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Button, Col, message, Typography } from 'antd';
+import { useRouter } from 'next/router';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 
 const { Title } = Typography;
 
@@ -28,8 +29,21 @@ export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
     })();
   }, [jamId]);
 
+  const router = useRouter();
+
+  const onClickToHome: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    await router.replace('/');
+  };
+
   return (
-    <Col style={{ width: '100%' }}>
+    <Col
+      style={{
+        width: '100%',
+        textAlign: 'center',
+        paddingTop: 40,
+        paddingBottom: 60,
+      }}
+    >
       <Title level={2}>Terimakasih !</Title>
       <br />
       <Title level={4}>Permintaan janji temu anda telah dikirim.</Title>
@@ -40,6 +54,10 @@ export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
       </Title>
       <br />
       <Title level={4}>Harap datang 15 menit sebelum jam {pukul}</Title>
+      <br />
+      <Button onClick={onClickToHome}>Ke Halaman Beranda</Button>
+      <br />
+      <br />
     </Col>
   );
 };

@@ -48,6 +48,7 @@ export const WelcomeSection: React.FC = (_props) => {
             layout="responsive"
             objectPosition="center top"
             alt="girl"
+            priority
           />
         </div>
       </div>

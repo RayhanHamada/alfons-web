@@ -7,13 +7,15 @@ const checkExistedAppointment: NextApiHandler<Response> = async (req, res) => {
 
   const { error, count } = await supabaseServer
     .from('appointment')
-    .select('id, date, stylishId, jamId', { count: 'exact' })
+    .select('id, date, stylish_id, jam_id', { count: 'exact' })
     .eq('date', tanggal)
-    .eq('stylishId', stylishId)
-    .eq('jamId', jamId);
+    .eq('stylish_id', parseInt(stylishId))
+    .eq('jam_id', parseInt(jamId));
 
   if (error || count === null) {
     res.json({ exists: false, error: 'Failed' });
+    console.log(error);
+
     return;
   }
 

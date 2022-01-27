@@ -36,6 +36,8 @@ const createAppointment: NextApiHandler = async (req, res) => {
     res.status(500).end();
     return;
   }
+
+  res.status(200).end();
 };
 
 export default createAppointment;

@@ -55,7 +55,7 @@ const CreateAppointmentForm: React.FC = (_props) => {
     if (res.error) {
       await message.error('Gagal mengecek appointment', 1);
     } else {
-      if (!res.exists) {
+      if (res.exists) {
         await message.error(
           'Oops, sudah ada appointment dengan stylish dan jam yang sama, silahkan pilih kembali stylish atau jam yang lain',
           4
