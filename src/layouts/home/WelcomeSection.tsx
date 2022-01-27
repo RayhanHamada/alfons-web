@@ -1,3 +1,4 @@
+import AppointmentHistoryButton from '@/components/home/AppointmentHistoryButton';
 import { CreateAppointmentButton } from '@/components/home/CreateAppointmentButton';
 import { Col, Layout, Typography } from 'antd';
 import Image from 'next/image';
@@ -39,6 +40,9 @@ export const WelcomeSection: React.FC = (_props) => {
           <br />
           <br />
           <CreateAppointmentButton />
+          <br />
+          <br />
+          <AppointmentHistoryButton />
         </Col>
         <div style={{ position: 'relative' }}>
           <Image
