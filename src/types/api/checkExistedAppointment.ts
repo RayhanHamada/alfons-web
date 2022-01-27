@@ -1,9 +1,10 @@
-export type Body = {
+export type Query = {
   tanggal: string;
-  stylishId: number;
-  jamId: number;
+  stylishId: string;
+  jamId: string;
 };
 
 export type Response = {
   exists: boolean;
+  error?: string;
 };

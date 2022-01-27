@@ -1,6 +1,11 @@
+import useDataDiri from '@/hooks/useDataDiriStore';
+import useJamStylishStore from '@/hooks/useJamStylishStore';
+import useServiceStore from '@/hooks/useServiceStore';
 import useStepsStore from '@/hooks/useStepsStore';
-import { Button, Col, Row, Steps } from 'antd';
-import { MouseEventHandler } from 'react';
+import useTanggalStore from '@/hooks/useTanggalStore';
+import checkExistedAppointment from '@/utility/api/checkExistedAppointment';
+import { Button, Col, message, Row, Spin, Steps } from 'antd';
+import { MouseEventHandler, useState } from 'react';
 import CabangForm from './CabangForm';
 import DataDiriForm from './DataDiriForm';
 import JamStylishForm from './JamStylishForm';
@@ -11,8 +16,13 @@ import TanggalForm from './TanggalForm';
 const { Step } = Steps;
 
 const CreateAppointmentForm: React.FC = (_props) => {
+  const { tanggal } = useTanggalStore();
+  const { id } = useDataDiri();
+  const {} = useServiceStore();
+  const { jamId, stylishId } = useJamStylishStore();
   const { step, canContinue, setCanContinue, incrementStep, decrementStep } =
     useStepsStore();
+  const [freeze, setFreeze] = useState(false);
 
   const onContinueClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     incrementStep();
@@ -26,7 +36,32 @@ const CreateAppointmentForm: React.FC = (_props) => {
     decrementStep();
   };
 
-  const onBuatAppointment: MouseEventHandler<HTMLButtonElement> = (e) => {};
+  const onBuatAppointment: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    setFreeze(true);
+    // check apakah ada appointment dengan tanggal, cabang, stylish serupa
+    const res = await checkExistedAppointment({
+      tanggal: tanggal.format('MM/DD/YYYY'),
+      jamId: jamId!.toString(),
+      stylishId: stylishId!.toString(),
+    });
+
+    if (res.error) {
+      await message.error('Gagal mengecek appointment', 1);
+    } else {
+      if (!res.exists) {
+        await message.error(
+          'Oops, sudah ada appointment dengan stylish dan jam yang sama, silahkan pilih kembali stylish atau jam yang lain',
+          4
+        );
+      }
+      // membuat appointment
+
+      await message.success('Berhasil membuat appointment !', 1);
+      // routing ke success page
+    }
+
+    setFreeze(false);
+  };
 
   return (
     <Col style={{ padding: '100px' }}>
@@ -63,19 +98,27 @@ const CreateAppointmentForm: React.FC = (_props) => {
           <br />
           <Row justify="space-between">
             {step !== 0 ? (
-              <Button type="ghost" onClick={onStepBackClick}>
+              <Button type="ghost" onClick={onStepBackClick} disabled={freeze}>
                 Kembali
               </Button>
             ) : undefined}
             <div></div>
             {canContinue ? (
               step !== 5 ? (
-                <Button type="primary" onClick={onContinueClick}>
+                <Button
+                  type="primary"
+                  onClick={onContinueClick}
+                  disabled={freeze}
+                >
                   Lanjut
                 </Button>
               ) : (
-                <Button type="primary" onClick={onBuatAppointment}>
-                  Buat Appointment !
+                <Button
+                  type="primary"
+                  onClick={onBuatAppointment}
+                  disabled={freeze}
+                >
+                  Buat Appointment ! {freeze ? <Spin spinning /> : ''}
                 </Button>
               )
             ) : undefined}

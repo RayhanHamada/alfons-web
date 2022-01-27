@@ -1,9 +1,9 @@
-import { Body, Response } from '@/types/api/checkExistedAppointment';
+import { Query, Response } from '@/types/api/checkExistedAppointment';
 import supabaseServer from '@/utility/supabaseServer';
 import { NextApiHandler } from 'next';
 
 const checkExistedAppointment: NextApiHandler<Response> = async (req, res) => {
-  const { tanggal, stylishId, jamId } = req.body as Body;
+  const { tanggal, stylishId, jamId } = req.query as Query;
 
   const { error, count } = await supabaseServer
     .from('appointment')
@@ -13,7 +13,7 @@ const checkExistedAppointment: NextApiHandler<Response> = async (req, res) => {
     .eq('jamId', jamId);
 
   if (error || count === null) {
-    res.status(500).end();
+    res.json({ exists: false, error: 'Failed' });
     return;
   }
 
