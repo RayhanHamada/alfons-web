@@ -1,5 +1,5 @@
 import useCabangStore from '@/hooks/useCabangStore';
-import useDataDiri from '@/hooks/useDataDiriStore';
+import useDataDiriStore from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
 import useStepsStore from '@/hooks/useStepsStore';
@@ -20,7 +20,7 @@ const { Step } = Steps;
 
 const CreateAppointmentForm: React.FC = (_props) => {
   const { tanggal } = useTanggalStore();
-  const { klienId } = useDataDiri();
+  const { klienId } = useDataDiriStore();
   const { cabangId } = useCabangStore();
   const { note, serviceIds } = useServiceStore();
   const { jamId, stylishId } = useJamStylishStore();

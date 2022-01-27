@@ -1,5 +1,5 @@
 import useCabangStore from '@/hooks/useCabangStore';
-import useDataDiri from '@/hooks/useDataDiriStore';
+import useDataDiriStore from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
 import useStepsStore from '@/hooks/useStepsStore';
@@ -14,7 +14,7 @@ const { Title } = Typography;
 export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
   const { tanggal, reset: resetTanggal } = useTanggalStore();
   const { jamId, reset: resetJamStylish } = useJamStylishStore();
-  const resetDataDiri = useDataDiri((store) => store.reset);
+  const resetDataDiri = useDataDiriStore((store) => store.reset);
   const resetCabang = useCabangStore((store) => store.reset);
   const resetServiceStore = useServiceStore((store) => store.reset);
   const resetStep = useStepsStore((store) => store.reset);

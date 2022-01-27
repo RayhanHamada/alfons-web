@@ -1,7 +1,7 @@
 import createStore from 'zustand';
 import { combine } from 'zustand/middleware';
 
-const useDataDiri = createStore(
+const useDataDiriStore = createStore(
   combine(
     {
       isChecked: false,
@@ -43,4 +43,4 @@ const useDataDiri = createStore(
   )
 );
 
-export default useDataDiri;
+export default useDataDiriStore;

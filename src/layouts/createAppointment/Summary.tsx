@@ -1,5 +1,5 @@
 import useCabangStore from '@/hooks/useCabangStore';
-import useDataDiri from '@/hooks/useDataDiriStore';
+import useDataDiriStore from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
 import useStepsStore from '@/hooks/useStepsStore';
@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 const { Title, Text } = Typography;
 
 const Summary: React.FC = (_props) => {
-  const { name, jenisKelamin } = useDataDiri();
+  const { name, jenisKelamin } = useDataDiriStore();
   const { cabangId } = useCabangStore();
   const { jamId, stylishId } = useJamStylishStore();
   const { serviceIds } = useServiceStore();

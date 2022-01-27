@@ -1,4 +1,4 @@
-import useDataDiri from '@/hooks/useDataDiriStore';
+import useDataDiriStore from '@/hooks/useDataDiriStore';
 import useStepsStore from '@/hooks/useStepsStore';
 import supabaseClient from '@/utility/supabaseClient';
 import {
@@ -36,10 +36,10 @@ const DataDiriForm: React.FC = (_props) => {
     phoneNumber,
     dataFilled,
     setDataDiri,
-    resetDataDiri,
+    reset,
     setIsChecked,
     setId,
-  } = useDataDiri();
+  } = useDataDiriStore();
   const { setCanContinue } = useStepsStore();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const DataDiriForm: React.FC = (_props) => {
     if (value === '') {
       message.error('Nomor Handphone harus diisi !');
       setIsChecked(false);
-      resetDataDiri();
+      reset();
       return;
     }
 
