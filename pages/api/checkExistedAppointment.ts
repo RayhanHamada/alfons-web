@@ -19,3 +19,5 @@ const checkExistedAppointment: NextApiHandler<Response> = async (req, res) => {
 
   res.json({ exists: count > 0 });
 };
+
+export default checkExistedAppointment;
