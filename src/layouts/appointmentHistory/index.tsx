@@ -82,7 +82,10 @@ const AppointmentHistory: React.FC = (_props) => {
           stylish_name: 'name' in v.stylish ? v.stylish.name : '',
           tanggal: v.date,
           status:
-            dayjs(v.date, 'YYYY-MM-DD') > dayjs()
+            dayjs(
+              `${v.date} ${'pukul' in v.jam ? v.jam.pukul : ''}`,
+              'YYYY-MM-DD HH:mm'
+            ) > dayjs()
               ? 'AKAN DATANG'
               : v.cancel
               ? 'CANCEL'
