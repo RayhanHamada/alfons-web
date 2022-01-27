@@ -2,6 +2,7 @@ import useCabangStore from '@/hooks/useCabangStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useStepsStore from '@/hooks/useStepsStore';
 import useTanggalStore from '@/hooks/useTanggalStore';
+import { dayjs } from '@/utility/dayjs';
 import supabaseClient from '@/utility/supabaseClient';
 import { Col, Form, message, Select, Typography } from 'antd';
 import { useEffect, useState } from 'react';
@@ -111,9 +112,18 @@ const JamStylishForm: React.FC = (_props) => {
         /**
          * filter untuk jam yang belum di order dan hanya ambil id dan pukulnya
          */
-        const filteredJam = selectJamData
+        let filteredJam = selectJamData
           .filter((jam) => !orderedJamIds.includes(jam.id))
           .map(({ pukul, id }) => ({ id, pukul }));
+
+        /**
+         * jika tanggal adalah hari ini, maka hanya jam2 1 jam kedepan atau lebih yang dapat dipilih
+         */
+        if (tanggal.startOf('day').isSame(dayjs().startOf('day'))) {
+          filteredJam = filteredJam.filter(
+            (j) => dayjs().hour() < dayjs(j.pukul, 'HH:mm').hour()
+          );
+        }
 
         setAvailableJam(filteredJam);
       }
@@ -138,12 +148,7 @@ const JamStylishForm: React.FC = (_props) => {
         <br />
         <Form layout="vertical" style={{ width: 400 }}>
           {availableStylish.length !== 0 ? (
-            <Form.Item
-              name="stylish"
-              label="Pilih Stylish"
-              initialValue={stylishId}
-              required
-            >
+            <Form.Item name="stylish" label="Pilih Stylish" required>
               <Select
                 options={availableStylish.map((s) => ({
                   label: s.name,
