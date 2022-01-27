@@ -80,7 +80,7 @@ const CreateAppointmentForm: React.FC = (_props) => {
         } else {
           await message.success('Berhasil membuat appointment !', 1);
           // routing ke success page
-          // await router.replace('/successCreateAppointment');
+          await router.replace('/successCreateAppointment');
         }
       }
     }
