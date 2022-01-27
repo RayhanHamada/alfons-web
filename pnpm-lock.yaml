@@ -12,6 +12,7 @@ specifiers:
   dotenv: ^14.2.0
   eslint: 8.7.0
   eslint-config-next: 12.0.8
+  ky: ^0.28.7
   less: ^4.1.2
   less-loader: ^10.2.0
   next: 12.0.8
@@ -29,6 +30,7 @@ dependencies:
   '@supabase/supabase-js': 1.29.4
   antd: 4.18.5_react-dom@17.0.2+react@17.0.2
   dayjs: 1.10.7
+  ky: 0.28.7
   next: 12.0.8_4c70148222b8596d478f3ced99e56e83
   next-with-less: 2.0.4_14d8a205c9d037b0988d609f76cfbea1
   react: 17.0.2
@@ -2319,6 +2321,11 @@ packages:
     resolution: {integrity: sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==}
     engines: {node: '>= 8'}
     dev: true
+
+  /ky/0.28.7:
+    resolution: {integrity: sha512-a23i6qSr/ep15vdtw/zyEQIDLoUaKDg9Jf04CYl/0ns/wXNYna26zJpI+MeIFaPeDvkrjLPrKtKOiiI3IE53RQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /language-subtag-registry/0.3.21:
     resolution: {integrity: sha512-L0IqwlIXjilBVVYKFT37X9Ih11Um5NEl9cbJIuU/SwP/zEEAbBPOnEeeuxVMf45ydWQRDQN3Nqc96OgbH1K+Pg==}
