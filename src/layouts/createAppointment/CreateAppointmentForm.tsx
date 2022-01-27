@@ -1,10 +1,13 @@
+import useCabangStore from '@/hooks/useCabangStore';
 import useDataDiri from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
 import useStepsStore from '@/hooks/useStepsStore';
 import useTanggalStore from '@/hooks/useTanggalStore';
 import checkExistedAppointment from '@/utility/api/checkExistedAppointment';
+import createAppointment from '@/utility/api/createAppointment';
 import { Button, Col, message, Row, Spin, Steps } from 'antd';
+import { useRouter } from 'next/router';
 import { MouseEventHandler, useState } from 'react';
 import CabangForm from './CabangForm';
 import DataDiriForm from './DataDiriForm';
@@ -17,11 +20,15 @@ const { Step } = Steps;
 
 const CreateAppointmentForm: React.FC = (_props) => {
   const { tanggal } = useTanggalStore();
-  const { id } = useDataDiri();
-  const {} = useServiceStore();
+  const { klienId } = useDataDiri();
+  const { cabangId } = useCabangStore();
+  const { note, serviceIds } = useServiceStore();
   const { jamId, stylishId } = useJamStylishStore();
   const { step, canContinue, setCanContinue, incrementStep, decrementStep } =
     useStepsStore();
+
+  const router = useRouter();
+
   const [freeze, setFreeze] = useState(false);
 
   const onContinueClick: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -53,11 +60,29 @@ const CreateAppointmentForm: React.FC = (_props) => {
           'Oops, sudah ada appointment dengan stylish dan jam yang sama, silahkan pilih kembali stylish atau jam yang lain',
           4
         );
-      }
-      // membuat appointment
+      } else {
+        // membuat appointment
+        const res2 = await createAppointment({
+          cabangId,
+          jamId: jamId!,
+          klienId: klienId!,
+          tanggal: tanggal.format('MM/DD/YYYY'),
+          stylishId: stylishId!,
+          note,
+          serviceIds,
+        });
 
-      await message.success('Berhasil membuat appointment !', 1);
-      // routing ke success page
+        if (!res2.ok) {
+          await message.error(
+            'Oops, terjadi kesalahan saat membuat appointment, silahkan ulangi kembali',
+            4
+          );
+        } else {
+          await message.success('Berhasil membuat appointment !', 1);
+          // routing ke success page
+          // await router.replace('/successCreateAppointment');
+        }
+      }
     }
 
     setFreeze(false);

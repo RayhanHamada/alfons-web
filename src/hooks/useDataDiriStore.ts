@@ -5,7 +5,7 @@ const useDataDiri = createStore(
   combine(
     {
       isChecked: false,
-      id: undefined as number | undefined,
+      klienId: undefined as number | undefined,
       name: '',
       phoneNumber: '',
       jenisKelamin: 'PRIA' as 'PRIA' | 'WANITA',
@@ -14,7 +14,7 @@ const useDataDiri = createStore(
     (set, get) => ({
       setIsChecked: (isChecked: boolean) => set({ isChecked }),
 
-      setId: (id: number) => set({ id }),
+      setId: (id: number) => set({ klienId: id }),
       setName: (name: string) => set({ name }),
       setPhoneNumber: (phoneNumber: string) => set({ phoneNumber }),
       setJenisKelamin: (jenisKelamin: 'PRIA' | 'WANITA') =>
