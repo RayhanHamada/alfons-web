@@ -1,4 +1,7 @@
+import useDataDiri from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
+import useServiceStore from '@/hooks/useServiceStore';
+import useStepsStore from '@/hooks/useStepsStore';
 import useTanggalStore from '@/hooks/useTanggalStore';
 import supabaseClient from '@/utility/supabaseClient';
 import { Button, Col, message, Typography } from 'antd';
@@ -8,8 +11,11 @@ import React, { MouseEventHandler, useEffect, useState } from 'react';
 const { Title } = Typography;
 
 export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
-  const { tanggal } = useTanggalStore();
-  const { jamId } = useJamStylishStore();
+  const { tanggal, reset: resetTanggal } = useTanggalStore();
+  const { jamId, reset: resetJamStylish } = useJamStylishStore();
+  const resetDataDiri = useDataDiri((store) => store.resetDataDiri);
+  const resetServiceStore = useServiceStore((store) => store.reset);
+  const resetStep = useStepsStore((store) => store.reset);
   const [pukul, setPukul] = useState<string>();
 
   useEffect(() => {
@@ -32,6 +38,11 @@ export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
   const router = useRouter();
 
   const onClickToHome: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    resetDataDiri();
+    resetJamStylish();
+    resetServiceStore();
+    resetStep();
+    resetTanggal();
     await router.replace('/');
   };
 
