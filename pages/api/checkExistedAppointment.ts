@@ -12,7 +12,7 @@ const checkExistedAppointment: NextApiHandler<Response> = async (req, res) => {
     .eq('stylishId', stylishId)
     .eq('jamId', jamId);
 
-  if (error || !count) {
+  if (error || count === null) {
     res.status(500).end();
     return;
   }
