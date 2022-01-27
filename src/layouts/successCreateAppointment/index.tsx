@@ -1,3 +1,4 @@
+import useCabangStore from '@/hooks/useCabangStore';
 import useDataDiri from '@/hooks/useDataDiriStore';
 import useJamStylishStore from '@/hooks/useJamStylishStore';
 import useServiceStore from '@/hooks/useServiceStore';
@@ -14,6 +15,7 @@ export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
   const { tanggal, reset: resetTanggal } = useTanggalStore();
   const { jamId, reset: resetJamStylish } = useJamStylishStore();
   const resetDataDiri = useDataDiri((store) => store.resetDataDiri);
+  const resetCabang = useCabangStore((store) => store.reset);
   const resetServiceStore = useServiceStore((store) => store.reset);
   const resetStep = useStepsStore((store) => store.reset);
   const [pukul, setPukul] = useState<string>();
@@ -39,10 +41,11 @@ export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
 
   const onClickToHome: MouseEventHandler<HTMLButtonElement> = async (e) => {
     resetDataDiri();
-    resetJamStylish();
     resetServiceStore();
-    resetStep();
     resetTanggal();
+    resetCabang();
+    resetJamStylish();
+    resetStep();
     await router.replace('/');
   };
 
