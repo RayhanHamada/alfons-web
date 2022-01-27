@@ -133,7 +133,7 @@ const AppointmentHistory: React.FC = (_props) => {
       </Form>
       {klienData ? (
         <Text>
-          Histori Pelayanan{' '}
+          Histori pelayanan untuk{' '}
           <b>
             {klienData.jenisKelamin === 'PRIA' ? 'Tn' : 'Ny'}. {klienData.name}
           </b>
