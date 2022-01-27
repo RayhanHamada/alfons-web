@@ -1,10 +1,40 @@
+import useCabangStore from '@/hooks/useCabangStore';
+import useDataDiri from '@/hooks/useDataDiriStore';
+import useJamStylishStore from '@/hooks/useJamStylishStore';
+import useServiceStore from '@/hooks/useServiceStore';
+import useStepsStore from '@/hooks/useStepsStore';
+import useTanggalStore from '@/hooks/useTanggalStore';
 import { Col, Layout, Row, Typography } from 'antd';
 import Image from 'next/image';
 import about from 'public/about.png';
+import { useEffect } from 'react';
 
 const { Title, Text } = Typography;
 
 export const AboutSection: React.FC = (_props) => {
+  const resetTanggal = useTanggalStore((store) => store.reset);
+  const resetJamStylish = useJamStylishStore((store) => store.reset);
+  const resetDataDiri = useDataDiri((store) => store.reset);
+  const resetCabang = useCabangStore((store) => store.reset);
+  const resetServiceStore = useServiceStore((store) => store.reset);
+  const resetStep = useStepsStore((store) => store.reset);
+
+  useEffect(() => {
+    resetDataDiri();
+    resetServiceStore();
+    resetTanggal();
+    resetCabang();
+    resetJamStylish();
+    resetStep();
+  }, [
+    resetCabang,
+    resetDataDiri,
+    resetJamStylish,
+    resetServiceStore,
+    resetStep,
+    resetTanggal,
+  ]);
+
   return (
     <Layout
       style={{

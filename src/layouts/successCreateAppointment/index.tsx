@@ -14,7 +14,7 @@ const { Title } = Typography;
 export const SuccessCreateAppointmentLayout: React.FC = (_props) => {
   const { tanggal, reset: resetTanggal } = useTanggalStore();
   const { jamId, reset: resetJamStylish } = useJamStylishStore();
-  const resetDataDiri = useDataDiri((store) => store.resetDataDiri);
+  const resetDataDiri = useDataDiri((store) => store.reset);
   const resetCabang = useCabangStore((store) => store.reset);
   const resetServiceStore = useServiceStore((store) => store.reset);
   const resetStep = useStepsStore((store) => store.reset);

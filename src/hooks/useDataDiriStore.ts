@@ -30,7 +30,7 @@ const useDataDiri = createStore(
           dataFilled: true,
         }),
 
-      resetDataDiri: () =>
+      reset: () =>
         set({
           isChecked: false,
           klienId: undefined,
