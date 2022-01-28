@@ -110,7 +110,7 @@ const DataDiriForm: React.FC = (_props) => {
         1
       );
     } else {
-      await message.error('Sukses', 1);
+      await message.success('Sukses', 1);
       setId(insertData.id);
       setDataDiri({
         name: insertData.name,
