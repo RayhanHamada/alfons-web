@@ -1,6 +1,8 @@
+import useDetailStore from '@/hooks/useDetailStore';
 import { dayjs } from '@/utility/dayjs';
 import supabaseClient from '@/utility/supabaseClient';
 import {
+  Button,
   Col,
   Form,
   Input,
@@ -9,9 +11,11 @@ import {
   TableColumnsType,
   Typography,
 } from 'antd';
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import DetailDrawer from './DetailDrawer';
 
 type TableDataType = {
+  id: number;
   cabang_name: string;
   stylish_name: string;
   tanggal: string;
@@ -46,6 +50,18 @@ const columns: TableColumnsType<TableDataType> = [
     dataIndex: 'status',
     render: (v: string) => <b>{v}</b>,
   },
+  {
+    title: 'Aksi',
+    dataIndex: 'id',
+    render: (value: number, record) => {
+      const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+        useDetailStore.getState().setAppointmentId(record.id);
+        useDetailStore.getState().toggleDrawer();
+      };
+
+      return <Button onClick={onClick}>Detail</Button>;
+    },
+  },
 ];
 
 const AppointmentHistory: React.FC = (_props) => {
@@ -64,7 +80,7 @@ const AppointmentHistory: React.FC = (_props) => {
         const { error: selectError, data: selectData } = await supabaseClient
           .from('appointment')
           .select(
-            'klien_id, date, cancel, jam(pukul), stylish(name), cabang(name)'
+            'id, klien_id, date, cancel, jam(pukul), stylish(name), cabang(name)'
           )
           .eq('klien_id', klienData.id);
 
@@ -77,6 +93,7 @@ const AppointmentHistory: React.FC = (_props) => {
         }
 
         const mappedAppointment = selectData.map<TableDataType>((v) => ({
+          id: v.id,
           cabang_name: 'name' in v.cabang ? v.cabang.name : '',
           pukul: 'pukul' in v.jam ? v.jam.pukul : '',
           stylish_name: 'name' in v.stylish ? v.stylish.name : '',
@@ -146,6 +163,7 @@ const AppointmentHistory: React.FC = (_props) => {
       <br />
       <Table columns={columns} dataSource={appointment} />
       <br />
+      <DetailDrawer />
     </Col>
   );
 };
