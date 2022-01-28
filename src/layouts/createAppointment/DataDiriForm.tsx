@@ -92,6 +92,11 @@ const DataDiriForm: React.FC = (_props) => {
 
   const onDaftarClicked = async (v: FormValue) => {
     const { name, jenisKelamin: jenis_kelamin, phoneNumber: phone_number } = v;
+
+    if (name === '') {
+      await message.error('Name cannot be empty', 1);
+      return;
+    }
     setFreeze(true);
 
     // insert data ke table klien
