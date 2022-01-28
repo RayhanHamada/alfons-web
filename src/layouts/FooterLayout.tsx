@@ -17,33 +17,57 @@ export const FooterLayout: React.FC = (_props) => {
           </div>
           <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Our Locations</Title>
-            <Text>Alfons Lotte Shopping Avenue</Text>
+            <a
+              style={{ color: 'black' }}
+              href="https://goo.gl/maps/ZwAFJyJB3WwK87Dq8"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Alfons Lotte Shopping Avenue
+            </a>
             <br />
-            <Text>Alfons PIM</Text>
+            <a
+              style={{ color: 'black' }}
+              href="https://goo.gl/maps/ufxLYGzZKB1kBdyAA"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Alfons PIM
+            </a>
             <br />
-            <Text>Alfons Panglima Polim</Text>
+            <a
+              style={{ color: 'black' }}
+              href="https://goo.gl/maps/Y3EsiwGSWHaEP1H46"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Alfons Panglima Polim
+            </a>
           </div>
           <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Company</Title>
-            <Link style={{ color: 'black' }} href="">
+            <Link style={{ color: 'black' }} href="/">
               About
             </Link>
+
             <br />
-            <Link style={{ color: 'black' }} href="">
-              Careers
-            </Link>
-            <br />
-            <Link style={{ color: 'black' }} href="">
+            <a
+              style={{ color: 'black' }}
+              href="https://m.facebook.com/profile.php?id=203503029677883"
+              target="_blank"
+              rel="noreferrer"
+            >
               Facebook
-            </Link>
+            </a>
             <br />
-            <Link style={{ color: 'black' }} href="">
+            <a
+              style={{ color: 'black' }}
+              href="https://www.instagram.com/alfons_salon.id/"
+              target="_blank"
+              rel="noreferrer"
+            >
               Instagram
-            </Link>
-            <br />
-            <Link style={{ color: 'black' }} href="">
-              TikTok
-            </Link>
+            </a>
           </div>
           <div style={{ flexDirection: 'column' }}>
             <Title level={4}>Business Hours</Title>
