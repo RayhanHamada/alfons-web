@@ -53,7 +53,7 @@ export const FooterLayout: React.FC = (_props) => {
             <br />
             <a
               style={{ color: 'black' }}
-              href="https://m.facebook.com/profile.php?id=203503029677883"
+              href="https://web.facebook.com/pages/Alfons-Salon/203503029677883"
               target="_blank"
               rel="noreferrer"
             >
